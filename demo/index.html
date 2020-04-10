@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <title>Upload .asice</title>
+  <head>
+      <meta charset="utf-8">
+      <link rel="stylesheet" href="normalize.css">
+      <link rel="stylesheet" href="popup.css">
+  </head> 
+  <body>
+
+    <p>We would like to make this process as easy as possible.</p>
+
+    <p>Because this is a hackathon, we need to simplify and make some assumptions.</p>
+
+    <p>We assume that you are E-Resident and as a E-Resident you already have the software installed on your machine.</p>
+
+    <p>1. Connect with MetaMask and sign a message to prove ownership of the address</p>
+
+    <button id="connect">connect</button><br>
+
+
+    Address: <input type="text" disabled id="ethaddress"><br>
+
+
+    <button id="sign">sign</button><br>
+
+    Signature: <input type="text" disabled id="signature"><br>
+
+
+    <button id="download">download</button><br>
+
+
+
+    <div id="drop-area">
+      <form class="my-form">
+        <p>Upload .asice</p>
+        <input type="file" id="macaroon">
+        <label class="button" for="macaroon">Select the .asice</label>
+      </form>
+    </div>
+
+    <div id="link"></div>
+
+
+    <button id="sendwebhook">send to discord</button><br>
+
+    <!-- <textarea readonly id="macaroon-textarea"></textarea> -->
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script src="https://unpkg.com/ipfs-http-client@30.1.3/dist/index.js"></script>
+    <script src="https://bundle.run/buffer@5.2.1"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.2.4/web3.js"></script> -->
+    <script src="popup.js"></script>
+
+    <!-- <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script> -->
+    
+  </body>
+</html>
