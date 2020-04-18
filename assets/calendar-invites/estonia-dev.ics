@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//ical.marudot.com//iCal Event Maker
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+DTSTAMP:20200418T103044Z
+UID:20200418T103044Z-1340849529@marudot.com
+DTSTART;TZID=/Etc/UTC:20200422T180000
+DTEND;TZID=/Etc/UTC:20200422T190000
+SUMMARY:🇪🇪EstoniaDAO 🛠dev squad ☎️
+URL:https%3A%2F%2Fdiscord.gg%2FeSkWarR
+DESCRIPTION:Wednesdays 17:00 UTC\n\nCheck the Discord developer channel for the agenda and online conferencing details.
+END:VEVENT
+END:VCALENDAR

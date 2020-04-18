@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//ical.marudot.com//iCal Event Maker
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+DTSTAMP:20200418T103059Z
+UID:20200418T103059Z-1844791366@marudot.com
+DTSTART;TZID=/Etc/UTC:20200423T170000
+RRULE:FREQ=WEEKLY;BYDAY=TH
+DTEND;TZID=/Etc/UTC:20200423T180000
+SUMMARY:🇪🇪EstoniaDAO ⚖️legal squad ☎️
+URL:https%3A%2F%2Fdiscord.gg%2Fw2CmhHz
+DESCRIPTION:Thursdays 16:00 UTC \n\nCheck the Discord legal channel for the agenda and online conferencing details.
+END:VEVENT
+END:VCALENDAR

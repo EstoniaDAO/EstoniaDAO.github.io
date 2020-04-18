@@ -96,6 +96,14 @@ $("#download").on("click", async function() {
   saveData(data, "wallet.json");
 })
 
+$("#sendgettodev").on("click", async function() {
+
+  $.get("https://polished-silence-366.fly.dev/verify?url=https://gateway.pinata.cloud/ipfs/QmVFST2tbVR6bokaMYXPxJJQXELwLfqWSrRaBgZqwaQT7Y/wallet.asice", function(data) {
+    console.log(data);
+  });
+
+})
+
 
 $("#sendwebhook").on("click", sendMessage)
 
