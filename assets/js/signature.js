@@ -1,47 +1,67 @@
-const ipfs = window.IpfsHttpClient('ipfs.infura.io', '5001', { protocol: 'https' });
+var app = angular.module("app", ["ngRoute"]);
+
+app.config(function ($routeProvider) {
+  $routeProvider
+    .when('/', {
+      templateUrl: 'pages/home.html'
+    })
+    .when('/demo', {
+      templateUrl: 'pages/demo.html',
+      controller: "DemoCtrl"
+    })
+    .otherwise('/')
+});
+
+app.controller("DemoCtrl", function($scope) {
+  $scope.message = "It works!";
+});
 
 
-// DRAG AND DROP
-// https://www.smashingmagazine.com/2018/01/drag-drop-file-uploader-vanilla-js/
-let dropArea = document.getElementById("drop-area")
 
-// Prevent default drag behaviors
-;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-  dropArea.addEventListener(eventName, preventDefaults, false)   
-  document.body.addEventListener(eventName, preventDefaults, false)
-})
+// const ipfs = window.IpfsHttpClient('ipfs.infura.io', '5001', { protocol: 'https' });
 
-// Highlight drop area when item is dragged over it
-;['dragenter', 'dragover'].forEach(eventName => {
-  dropArea.addEventListener(eventName, highlight, false)
-})
 
-;['dragleave', 'drop'].forEach(eventName => {
-  dropArea.addEventListener(eventName, unhighlight, false)
-})
+// // DRAG AND DROP
+// // https://www.smashingmagazine.com/2018/01/drag-drop-file-uploader-vanilla-js/
+// let dropArea = document.getElementById("drop-area")
 
-// Handle dropped files
-dropArea.addEventListener('drop', handleDrop, false)
+// // Prevent default drag behaviors
+// ;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+//   dropArea.addEventListener(eventName, preventDefaults, false)   
+//   document.body.addEventListener(eventName, preventDefaults, false)
+// })
 
-function preventDefaults (e) {
-  e.preventDefault()
-  e.stopPropagation()
-}
+// // Highlight drop area when item is dragged over it
+// ;['dragenter', 'dragover'].forEach(eventName => {
+//   dropArea.addEventListener(eventName, highlight, false)
+// })
 
-function highlight(e) {
-  dropArea.classList.add('highlight')
-}
+// ;['dragleave', 'drop'].forEach(eventName => {
+//   dropArea.addEventListener(eventName, unhighlight, false)
+// })
 
-function unhighlight(e) {
-  dropArea.classList.remove('highlight')
-}
+// // Handle dropped files
+// dropArea.addEventListener('drop', handleDrop, false)
 
-// https://stackoverflow.com/questions/40031688/javascript-arraybuffer-to-hex
-function buf2hex(buffer) { // buffer is an ArrayBuffer
-  return Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join('');
-}
+// function preventDefaults (e) {
+//   e.preventDefault()
+//   e.stopPropagation()
+// }
 
-$("#macaroon").on("change", handleDrop);
+// function highlight(e) {
+//   dropArea.classList.add('highlight')
+// }
+
+// function unhighlight(e) {
+//   dropArea.classList.remove('highlight')
+// }
+
+// // https://stackoverflow.com/questions/40031688/javascript-arraybuffer-to-hex
+// function buf2hex(buffer) { // buffer is an ArrayBuffer
+//   return Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join('');
+// }
+
+// $("#macaroon").on("change", handleDrop);
 
 
 

@@ -1,3 +1,22 @@
+### Running the websitee
+
+Website uses Angular 1.x for routing and UI interactions.
+
+Because it makes some web requests to fetch individual pages, you need to run a simple web server.
+
+On Mac, `python` is installed out of the box and you can simply
+
+1. `python -m SimpleHTTPServer`
+2. `open http://localhost:8000`
+
+### Knowledge base: Notion
+
+
+### Discussions: Discord
+
+
+### Website HTML template
+
 Story by HTML5 UP
 html5up.net | @ajlkn
 Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
