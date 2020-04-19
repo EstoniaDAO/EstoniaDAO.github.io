@@ -13,6 +13,249 @@
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
+			<style type="text/css">
+				#wrapper {
+					/*display: none;*/
+				}
+				#drop-area {
+				  border: 2px dashed #ccc;
+				  border-radius: 20px;
+				  width: 190px;
+				  margin: 50px auto;
+				  padding: 20px;
+				}
+				#drop-area.highlight {
+				  border-color: purple;
+				}
+				.button {
+				  display: inline-block;
+				  padding: 10px;
+				  background: #ccc;
+				  cursor: pointer;
+				  border-radius: 5px;
+				  border: 1px solid #ccc;
+				}
+				.button:hover {
+				  background: #ddd;
+				}
+				#macaroon {
+				  display: none;
+				}
+				#macaroon-textarea {
+				  font-family: monospace;
+				  font-size: 0.8em;
+				  width: 240px;
+				  height: 100px;
+				  background-color: #e2e2e2;
+				  filter: blur(3px)
+				}
+				dl dd {
+					margin-left: 0;
+				}
+
+				.emptystep {
+					border: 1px solid black;
+					padding: 4px;;
+				}
+			</style>
+
+
+<div id="upload">
+
+
+<p>We would like to make this process as easy as possible.</p>
+
+    <!-- <p>Because this is a hackathon, we need to simplify and make some assumptions.</p>
+
+    <p></p>
+
+    <p>1. Connect with MetaMask and sign a message to prove ownership of the address</p> -->
+
+    <!-- <button id="connect">connect</button><br> -->
+
+
+    <!-- Address: <input type="text" disabled id="ethaddress"><br> -->
+
+
+    <!-- <button id="sign">sign</button><br> -->
+
+    <!-- Signature: <input type="text" disabled id="signature"><br> -->
+
+
+    <!-- <button id="download">download</button><br> -->
+
+
+
+
+</div>
+
+			<div id="wrapper" class="divided">
+
+
+				<!-- Additional Elements -->
+					<section class="wrapper style1 align-center">
+						<div class="inner">
+							<h2>Additional Elements</h2>
+							<p>Finally, here are some additional elements you <em>might</em> find useful (and yup, they look fine with any <span class="demo-controls">appearance</span>).</p>
+							<div class="index align-left">
+
+
+
+								<!-- Definition List -->
+									<section>
+										<header>
+											<h3>Step 1</h3>
+										</header>
+										<div class="content">
+
+											<dl>
+												<dt>Your Ethereum address. <a href id="connect">Retrieve from Metamask</a>.</dt>
+												<dd>
+													<input type="text" id="ethaddress" placeholder="0x007...deadbeef"><br>
+													
+												</dd>
+											</dl>
+
+										</div>
+									</section>									
+									<section>
+										<header>
+											<h3>Step 2</h3>
+										</header>
+										<div class="content">
+
+											<dl>
+												<dt>Confirm ownership. <a href id="sign">Sign using Metamask.</a></dt>
+												<dd>
+													<input type="text" id="signature"><br>
+												</dd>
+											</dl>
+
+										</div>
+									</section>									
+									<section>
+										<header>
+											<h3>Step 3</h3>
+										</header>
+										<div class="content">
+
+											<dl>
+												<dt><a href id="download">Download the file</a>.</dt>
+												<dd>
+
+													<pre><code>{
+  "address":<span class="emptystep">complete step 1</span>"0x85A363699C6864248a6FfCA66e4a1A5cCf9f5567",
+  "signature":"0xf44ed67d553c6b2cf5a90c8047a49e594a2afd556966e9665a9e9b74de614c8c7d0e08e213153ab43d1556646a11c910a6417f853aa2223fcf0e554dd68538501b"
+}</code></pre>
+
+												</dd>
+											</dl>
+
+										</div>
+									</section>									
+									<section>
+										<header>
+											<h3>Step 4</h3>
+										</header>
+										<div class="content">
+
+											<dl>
+												<dt>Sign using ID-software on your computer.</dt>
+												<dd>
+													<p>As an E-Resident you probably have the software / browser extension already installed on your machine.</p>
+														
+													<p>You can find the Estonian DigiDoc4 ID-software <a href="https://installer.id.ee/?lang=eng">here</a>.</p>
+														
+													<blockquote>Note: your Estonian ID number and legal name will be included in the signature.</blockquote></p>
+
+														
+												</dd>
+											</dl>
+
+										</div>
+									</section>									
+									<section>
+										<header>
+											<h3>Step 5</h3>
+										</header>
+										<div class="content">
+
+											<dl>
+												<dt>Upload the signed file.</dt>
+												<dd>
+													<p>The file created in the previous step will be uploaded to IPFS</p>
+
+
+													<div id="drop-area">
+														<form class="my-form">
+														  <p>Upload .asice</p>
+														  <input type="file" id="macaroon">
+														  <label class="button" for="macaroon">Select the .asice</label>
+														</form>
+													  </div>
+												  
+													  <div id="link"></div>
+
+													  <button id="sendgettodev">send to dev</button><br>
+
+
+												</dd>
+											</dl>
+
+										</div>
+									</section>									
+									<section>
+										<header>
+											<h3>Step 6</h3>
+										</header>
+										<div class="content">
+
+											<dl>
+												<dt><a href id="sendwebhook">Send to Discord</a>.</dt>
+												<dd>
+
+													<p>Just click the button and it will automagically post to Discord via webhook.</p>
+
+													<p>Verify that it has been posted, join the Discord, say "hi" in the intros channel (if you haven't done it already).</p>
+
+
+													<!-- <button id="sendwebhook">send to discord</button><br> -->
+
+													
+
+												</dd>
+											</dl>
+
+										</div>
+									</section>									
+									<section>
+										<header>
+											<h3>Success 🎉</h3>
+										</header>
+										<div class="content">
+
+											<dl>
+												<dt>Our mantra is to simplify...</dt>
+												<dd>
+													<p>If you know better please check <a href="https://www.notion.so/estoniadao/0a878e2df27544fea76eb1de65a0e46a?v=fb0abefb71eb47e2a7edffb7d62dea83&p=6d72017dde4b469b849b09c1051f6ec7">development squad on Notion</a></p>
+
+													<blockquote>Our target audience are E-Residents early adopters with interests in blockchain, cryptocurriences and DAO. We made some compromises, done is better than perfect, it is a hackathon, always be shipping...</blockquote>
+
+												</dd>
+											</dl>
+
+										</div>
+									</section>
+
+							</div>
+
+
+						</div>
+					</section>
+
+			</div>
+
+
 
 		<!-- Wrapper -->
 			<div id="wrapper" class="divided">
@@ -403,7 +646,18 @@
 			<script src="assets/js/browser.min.js"></script>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+
+
+			<script src="https://unpkg.com/ipfs-http-client@30.1.3/dist/index.js"></script>
+			<script src="https://bundle.run/buffer@5.2.1"></script>
+			<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+			<script src="demo/popup.js"></script>
+
+			<script src="https://unpkg.com/ipfs-http-client@30.1.3/dist/index.js"></script>
+		    <script src="https://bundle.run/buffer@5.2.1"></script>
+		    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+
+		    <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 
 	</body>
 </html>

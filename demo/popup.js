@@ -75,17 +75,25 @@ function handleDrop(e) {
 }
 
 
-$("#connect").on("click", async function() {
+$("#connect").on("click", async function(event) {
+  event.preventDefault();
+  event.stopPropagation();
+
   ethEnabled();
   accounts = await web3.eth.getAccounts()
   $("#ethaddress").val(accounts[0])
 
+
 })
 
-$("#sign").on("click", async function() {
+$("#sign").on("click", async function(event) {
+  event.preventDefault();
+  event.stopPropagation();
+
   signature = await web3.eth.personal.sign(accounts[0], accounts[0]); // signing the message "0x85" from the account
   $("#signature").val(signature)
 
+  return false;v
 })
 
 $("#download").on("click", async function() {
