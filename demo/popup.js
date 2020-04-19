@@ -93,15 +93,20 @@ $("#sign").on("click", async function(event) {
   signature = await web3.eth.personal.sign(accounts[0], accounts[0]); // signing the message "0x85" from the account
   $("#signature").val(signature)
 
-  return false;v
+  return false;
 })
 
 $("#download").on("click", async function() {
+  event.preventDefault();
+  event.stopPropagation();
+
   var data = {
     "address": accounts[0],
     "signature": signature
   }
   saveData(data, "wallet.json");
+
+  return false;
 })
 
 $("#sendgettodev").on("click", async function() {
