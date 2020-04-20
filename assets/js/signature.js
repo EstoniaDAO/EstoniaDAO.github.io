@@ -43,6 +43,8 @@ app.controller("DemoCtrl", function($scope, $http, $q) {
 
   $scope.uploadFile = function(event) {
     $scope.ipfsuploading = true;
+    $scope.$apply();
+
     var file = event.target.files[0]
 
     let fileReader = new FileReader();
@@ -61,14 +63,14 @@ app.controller("DemoCtrl", function($scope, $http, $q) {
 
         makeRequest($scope.url).then(function(result) {
           $scope.checkingsignanture = false;
+          $scope.signatureData = result.data.replace("<html><body><pre><code>","").replace("</code></pre></body></html>","");
 
           if (result.valid) {
             console.log("SIGNATURE VALID");
-            $scope.signature = true;
+            $scope.signatureValid = true;
             sendMessage($scope.url); // SENDING WEBHOOK TO DISCORD
           } else {
-            $scope.signature = false;
-            $scope.signatureData = result.data;
+            $scope.signatureValid = false;
           }
         })
 
@@ -94,7 +96,7 @@ app.controller("DemoCtrl", function($scope, $http, $q) {
       url: baseURL + url
     }).then(function successCallback(response) {
         let responseData = response.data;
-        let signatureValid = responseData.indexOf("Signature method" !== -1) && responseData.indexOf("Signing time" !== -1) && responseData.indexOf("Signing cert" !== -1) && responseData.indexOf("Signed by" !== -1)
+        let signatureValid = responseData.indexOf("Signature method") !== -1 && responseData.indexOf("Signing time") !== -1 && responseData.indexOf("Signing cert") !== -1 && responseData.indexOf("Signed by") !== -1;
 
         defer.resolve({
           valid : signatureValid,
@@ -139,7 +141,7 @@ app.controller("DemoCtrl", function($scope, $http, $q) {
 
   function sendMessage(url) {
     var request = new XMLHttpRequest();
-    request.open("POST", "https://discordapp.com/api/webhooks/698210101873606748/MhrGbkU0uSCJLN6ZYz2wabc5_IZIfJXnpEjs69s0HMbKUFDN8atNe6LbwuE91LgUxRk6");
+    request.open("POST", "https://discordapp.com/api/webhooks/701899272559263765/EkB77Z-LNW9DWm2VMcgd-J6iFO11DBfYhn-gX7X5y40Dlqo1YwKR8vnqMmAejyR3_r2F");
   
     request.setRequestHeader('Content-type', 'application/json');
   
@@ -151,7 +153,6 @@ app.controller("DemoCtrl", function($scope, $http, $q) {
   
     request.send(JSON.stringify(params));
   }
-
 
 });
 

@@ -97,20 +97,22 @@
                                     Uploading to IPFS <img src="images/spinner.gif" height=60>
                                 </div>
 
-                                <div ng-show="verifysignature">
+                                <div ng-show="checkingsignanture">
                                     Checking the signature <img src="images/spinner.gif" height=60>
                                 </div>
 
-                                <div ng-show="signature === true">
+                                <div ng-show="signatureValid === true">
                                     <p>Automated check confirmed the E-ID signature is valid.</p>
-                                    <p>It was posted to Discord</p>
+                                    <p><a href ng-click="showDetails = !showDetails"><span ng-show="!showDetails">See details</span><span ng-show="showDetails">Hide details</span></a>.</p>
+                                    <pre ng-show="showDetails">{{ signatureData }}</pre>
+                                    <p>It was posted to Discord.</p>
                                     <p>If you haven't done it already, say "hi" in the <a href="https://discord.gg/kR85ktG">intros channel</a>!</p>
 
                                     <!-- <button id="sendgettodev">send to dev</button><br> -->
                                 </div>
 
-                                <div ng-show="signature === false">
-                                    <p>Something went wrong when verifying signature</p>
+                                <div ng-show="signatureValid === false">
+                                    <p><strong>Something went wrong when verifying signature.</strong></p>
                                     <pre>{{ signatureData }}</pre>
                                 </div>
 
