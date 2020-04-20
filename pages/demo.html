@@ -2,7 +2,7 @@
 <section class="wrapper style1 align-center">
     <div class="inner">
         <h2>Estonia DAO onboarding</h2>
-        <p>To successfully onboard you as as a member we need to know your <strong>ETH address</strong> and <strong>Estonian ID</strong>.</p>
+        <p>To successfully onboard you as as a member we need to know your <strong>Ethereum address</strong> and <strong>Estonian ID</strong>.</p>
         <div class="index align-left">
 
                 <section>
@@ -12,9 +12,9 @@
                     <div class="content">
 
                         <dl>
-                            <dt>Your Ethereum address. <a href id="connect">Retrieve from Metamask</a>.</dt>
+                            <dt>Your Ethereum address. <a href ng-click="connect()">Retrieve from Metamask</a>.</dt>
                             <dd>
-                                <input type="text" id="ethaddress" placeholder="0x007..."><br>
+                                <input type="text" placeholder="0x007..." ng-model="address"><br>
                                 <p>You can manually paste your ETH address. Metamask method is for pure convenience.</p>
                             </dd>
                         </dl>
@@ -28,9 +28,9 @@
                     <div class="content">
 
                         <dl>
-                            <dt>Confirm ownership. <a href id="sign">Sign using Metamask.</a></dt>
+                            <dt>Confirm ownership. <a href ng-click="sign()">Sign using Metamask.</a></dt>
                             <dd>
-                                <input type="text" id="signature" placeholder="0x007..."><br>
+                                <input type="text" placeholder="0x007..." ng-model="signature"><br>
                                 <p>Signature is required otherwise you could put any address.</p>
                             </dd>
                         </dl>
@@ -44,12 +44,12 @@
                     <div class="content">
 
                         <dl>
-                            <dt><a href id="download">Download the file</a>.</dt>
+                            <dt><a href ng-click="download()">Download the file</a>.</dt>
                             <dd>
 
                                 <pre><code style="line-height: 2.2em;">{
-<span>  </span>"address":<span>  </span><span class="emptystep">complete step 1</span>,
-<span>  </span>"signature":<span class="emptystep">complete step 2</span>
+<span>  </span>"address":<span>  </span><span class="emptystep" ng-hide="address">complete step 1</span><span ng-bind="address"></span>,
+<span>  </span>"signature":<span ng-hide="signature" class="emptystep">complete step 2</span><span ng-bind="signature"></span>
 }</code></pre>
 
                             </dd>
@@ -89,26 +89,28 @@
                             <dd>
                                 <p>The file created in the previous step will be uploaded to IPFS</p>
 
+                                <input type="file" custom-on-change="uploadFile">
 
-                                <div id="drop-area">
-                                    <form class="my-form">
-                                        <p>Upload .asice</p>
-                                        <input type="file" id="macaroon">
-                                        <label class="button" for="macaroon">Select the .asice</label>
-                                    </form>
-                                    </div>
+                                <div ng-bind="url"></div>
+
+                                <p>Checking the signature</p>
+
+
+                                <!-- <input type="file" id="macaroon"> -->
+
                                 
-                                    <div id="link"></div>
+                                    
 
-                                    <button id="sendgettodev">send to dev</button><br>
+                                <button id="sendgettodev">send to dev</button><br>
 
 
                             </dd>
                         </dl>
 
                     </div>
-                </section>									
-                <section>
+                </section>		
+                							
+                <!-- <section>
                     <header>
                         <h3>Step 6</h3>
                     </header>
@@ -123,16 +125,16 @@
                                 <p>Verify that it has been posted, join the Discord, say "hi" in the intros channel (if you haven't done it already).</p>
 
 
-                                <!-- <button id="sendwebhook">send to discord</button><br> -->
-
                                 
 
                             </dd>
                         </dl>
 
                     </div>
-                </section>									
-                <section>
+                </section>		 -->
+                
+                
+                <!-- <section>
                     <header>
                         <h3>Success 🎉</h3>
                     </header>
@@ -149,7 +151,7 @@
                         </dl>
 
                     </div>
-                </section>
+                </section> -->
 
         </div>
 

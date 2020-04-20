@@ -1,44 +1,9 @@
-#wrapper {
-    /*display: none;*/
-}
-#drop-area {
-  border: 2px dashed #ccc;
-  border-radius: 20px;
-  width: 190px;
-  margin: 50px auto;
-  padding: 20px;
-}
-#drop-area.highlight {
-  border-color: purple;
-}
-.button {
-  display: inline-block;
-  padding: 10px;
-  background: #ccc;
-  cursor: pointer;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-.button:hover {
-  background: #ddd;
-}
-#macaroon {
-  display: none;
-}
-#macaroon-textarea {
-  font-family: monospace;
-  font-size: 0.8em;
-  width: 240px;
-  height: 100px;
-  background-color: #e2e2e2;
-  filter: blur(3px)
-}
 dl dd {
-    margin-left: 0;
+  margin-left: 0;
 }
 
 .emptystep {
-    margin-left: 4px;
-    border: 1px solid black;
-    padding: 4px;;
+  margin-left: 4px;
+  border: 1px solid black;
+  padding: 4px;;
 }
