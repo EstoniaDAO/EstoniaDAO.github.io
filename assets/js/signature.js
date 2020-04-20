@@ -41,14 +41,18 @@ app.controller("DemoCtrl", function($scope, $http, $q) {
     saveData(data, "wallet.json");
   }
 
-  $scope.uploadFile = function(event){
+  $scope.uploadFile = function(event) {
+    $scope.ipfsuploading = true;
     var file = event.target.files[0]
 
     let fileReader = new FileReader();
     fileReader.onload = function(e) {
-
       const magic = buffer.Buffer(fileReader.result); // honestly as a web developer I do not fully appreciate the difference between buffer and arrayBuffer 
       ipfs.add(magic, (err, result) => {
+
+        $scope.ipfsuploading = false;
+        $scope.checkingsignanture = true;
+
         console.log(err, result);
         $scope.url = "https://gateway.ipfs.io/ipfs/" + result[0].hash;
         $scope.$apply();
@@ -56,8 +60,15 @@ app.controller("DemoCtrl", function($scope, $http, $q) {
         console.log($scope.url);
 
         makeRequest($scope.url).then(function(result) {
-          if (result) {
+          $scope.checkingsignanture = false;
+
+          if (result.valid) {
             console.log("SIGNATURE VALID");
+            $scope.signature = true;
+            sendMessage($scope.url); // SENDING WEBHOOK TO DISCORD
+          } else {
+            $scope.signature = false;
+            $scope.signatureData = result.data;
           }
         })
 
@@ -85,12 +96,15 @@ app.controller("DemoCtrl", function($scope, $http, $q) {
         let responseData = response.data;
         let signatureValid = responseData.indexOf("Signature method" !== -1) && responseData.indexOf("Signing time" !== -1) && responseData.indexOf("Signing cert" !== -1) && responseData.indexOf("Signed by" !== -1)
 
-        defer.resolve(signatureValid);
+        defer.resolve({
+          valid : signatureValid,
+          data: responseData
+        });
 
       }, function errorCallback(response) {
+        alert(response.data);
         console.error(response.data);
         defer.reject(response.data)
-
       });
 
       return defer.promise;
@@ -122,6 +136,23 @@ app.controller("DemoCtrl", function($scope, $http, $q) {
     };
   }());
 
+
+  function sendMessage(url) {
+    var request = new XMLHttpRequest();
+    request.open("POST", "https://discordapp.com/api/webhooks/698210101873606748/MhrGbkU0uSCJLN6ZYz2wabc5_IZIfJXnpEjs69s0HMbKUFDN8atNe6LbwuE91LgUxRk6");
+  
+    request.setRequestHeader('Content-type', 'application/json');
+  
+    var params = {
+      username: "IPFS upload from the website",
+      avatar_url: "",
+      content: url
+    }
+  
+    request.send(JSON.stringify(params));
+  }
+
+
 });
 
 // https://stackoverflow.com/a/19647381/775359
@@ -138,37 +169,3 @@ app.directive('customOnChange', function() {
     }
   };
 });
-
-
-
-
-
-
-
-
-
-$("#sendgettodev").on("click", async function() {
-
-  $.get("https://polished-silence-366.fly.dev/verify?url=https://gateway.pinata.cloud/ipfs/QmVFST2tbVR6bokaMYXPxJJQXELwLfqWSrRaBgZqwaQT7Y/wallet.asice", function(data) {
-    console.log(data);
-  });
-
-})
-
-
-$("#sendwebhook").on("click", sendMessage)
-
-function sendMessage() {
-  var request = new XMLHttpRequest();
-  request.open("POST", "https://discordapp.com/api/webhooks/698210101873606748/MhrGbkU0uSCJLN6ZYz2wabc5_IZIfJXnpEjs69s0HMbKUFDN8atNe6LbwuE91LgUxRk6");
-
-  request.setRequestHeader('Content-type', 'application/json');
-
-  var params = {
-    username: "IPFS upload from the website",
-    avatar_url: "",
-    content: url
-  }
-
-  request.send(JSON.stringify(params));
-}

@@ -89,21 +89,36 @@
                             <dd>
                                 <p>The file created in the previous step will be uploaded to IPFS</p>
 
-                                <input type="file" custom-on-change="uploadFile">
+                                <input type="file" custom-on-change="uploadFile"><br>
 
                                 <div ng-bind="url"></div>
 
-                                <p>Checking the signature</p>
+                                <div ng-show="ipfsuploading">
+                                    Uploading to IPFS <img src="images/spinner.gif" height=60>
+                                </div>
+
+                                <div ng-show="verifysignature">
+                                    Checking the signature <img src="images/spinner.gif" height=60>
+                                </div>
+
+                                <div ng-show="signature === true">
+                                    <p>Automated check confirmed the E-ID signature is valid.</p>
+                                    <p>It was posted to Discord</p>
+                                    <p>If you haven't done it already, say "hi" in the <a href="https://discord.gg/kR85ktG">intros channel</a>!</p>
+
+                                    <!-- <button id="sendgettodev">send to dev</button><br> -->
+                                </div>
+
+                                <div ng-show="signature === false">
+                                    <p>Something went wrong when verifying signature</p>
+                                    <pre>{{ signatureData }}</pre>
+                                </div>
 
 
       
                                     
 
-                                <button id="sendgettodev">send to dev</button><br>
-
-                                <p>If you know better please check <a href="https://www.notion.so/estoniadao/0a878e2df27544fea76eb1de65a0e46a?v=fb0abefb71eb47e2a7edffb7d62dea83&p=6d72017dde4b469b849b09c1051f6ec7">development squad on Notion</a></p>
-
-
+                            
                             </dd>
                         </dl>
 
