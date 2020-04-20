@@ -2,7 +2,7 @@
 <section class="wrapper style1 align-center">
     <div class="inner">
         <h2>Estonia DAO onboarding</h2>
-        <p>To successfully onboard you as as a member we need to know your <strong>Ethereum address</strong> and <strong>Estonian ID</strong>.</p>
+        <p>To successfully onboard you as a new member we will need to verify your <strong>Ethereum address</strong> and <strong>Estonian ID</strong>.</p>
         <div class="index align-left">
 
                 <section>
@@ -14,7 +14,7 @@
                         <dl>
                             <dt>Your Ethereum address. <a href ng-click="connect()">Retrieve from Metamask</a>.</dt>
                             <dd>
-                                <input type="text" placeholder="0x007..." ng-model="address"><br>
+                                <input type="text" placeholder="0x007..." ng-model="address" id="address"><br>
                                 <p>You can manually paste your ETH address. Metamask method is for pure convenience.</p>
                             </dd>
                         </dl>
@@ -30,7 +30,7 @@
                         <dl>
                             <dt>Confirm ownership. <a href ng-click="sign()">Sign using Metamask.</a></dt>
                             <dd>
-                                <input type="text" placeholder="0x007..." ng-model="signature"><br>
+                                <input type="text" placeholder="0x007..." ng-model="signature" id="signature"><br>
                                 <p>Signature is required otherwise you could put any address.</p>
                             </dd>
                         </dl>
@@ -48,8 +48,8 @@
                             <dd>
 
                                 <pre><code style="line-height: 2.2em;">{
-<span>  </span>"address":<span>  </span><span class="emptystep" ng-hide="address">complete step 1</span><span ng-bind="address"></span>,
-<span>  </span>"signature":<span ng-hide="signature" class="emptystep">complete step 2</span><span ng-bind="signature"></span>
+<span>  </span>"address":<span>  </span><span class="emptystep" ng-hide="address" ng-click="focus('#address')">complete step 1</span><span ng-bind="address"></span>,
+<span>  </span>"signature":<span ng-hide="signature" class="emptystep" ng-click="focus('#signature')">complete step 2</span><span ng-bind="signature"></span>
 }</code></pre>
 
                             </dd>
@@ -96,12 +96,12 @@
                                 <p>Checking the signature</p>
 
 
-                                <!-- <input type="file" id="macaroon"> -->
-
-                                
+      
                                     
 
                                 <button id="sendgettodev">send to dev</button><br>
+
+                                <p>If you know better please check <a href="https://www.notion.so/estoniadao/0a878e2df27544fea76eb1de65a0e46a?v=fb0abefb71eb47e2a7edffb7d62dea83&p=6d72017dde4b469b849b09c1051f6ec7">development squad on Notion</a></p>
 
 
                             </dd>
@@ -109,52 +109,7 @@
 
                     </div>
                 </section>		
-                							
-                <!-- <section>
-                    <header>
-                        <h3>Step 6</h3>
-                    </header>
-                    <div class="content">
-
-                        <dl>
-                            <dt><a href id="sendwebhook">Send to Discord</a>.</dt>
-                            <dd>
-
-                                <p>Just click the button and it will automagically post to Discord via webhook.</p>
-
-                                <p>Verify that it has been posted, join the Discord, say "hi" in the intros channel (if you haven't done it already).</p>
-
-
-                                
-
-                            </dd>
-                        </dl>
-
-                    </div>
-                </section>		 -->
-                
-                
-                <!-- <section>
-                    <header>
-                        <h3>Success 🎉</h3>
-                    </header>
-                    <div class="content">
-
-                        <dl>
-                            <dt>Our mantra is to simplify...</dt>
-                            <dd>
-                                <p>If you know better please check <a href="https://www.notion.so/estoniadao/0a878e2df27544fea76eb1de65a0e46a?v=fb0abefb71eb47e2a7edffb7d62dea83&p=6d72017dde4b469b849b09c1051f6ec7">development squad on Notion</a></p>
-
-                                <blockquote>Our target audience are E-Residents early adopters with interests in blockchain, cryptocurriences and DAO. We made some compromises, done is better than perfect, it is a hackathon, always be shipping...</blockquote>
-
-                            </dd>
-                        </dl>
-
-                    </div>
-                </section> -->
 
         </div>
-
-
     </div>
 </section>

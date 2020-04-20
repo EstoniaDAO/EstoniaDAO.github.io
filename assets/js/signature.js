@@ -17,25 +17,25 @@ app.config(function ($routeProvider) {
 app.controller("DemoCtrl", function($scope, $http, $q) {
 
   $scope.connect = async function() {
-    ethEnabled();
+    let address = await ethEnabled();
     accounts = await web3.eth.getAccounts()
-    $scope.address = accounts[0];
+    $scope.address = address[0] || accounts[0]
     $scope.$apply();
   }
 
   $scope.sign = async function() {
-    signature = await web3.eth.personal.sign($scope.address, accounts[0]);
+    signature = await web3.eth.personal.sign($scope.address, $scope.address);
     $scope.signature = signature;
     $scope.$apply();
   }
 
   $scope.download = function() {
-    if (!$scope.account || !$scope.signature) {
+    if (!$scope.address || !$scope.signature) {
       alert("Please ensure both address and signature are present.")
       return;
     }
     var data = {
-      "address": $scope.account,
+      "address": $scope.address,
       "signature": $scope.signature
     }
     saveData(data, "wallet.json");
@@ -67,9 +67,12 @@ app.controller("DemoCtrl", function($scope, $http, $q) {
 
   };
 
+  $scope.focus = function(selector) {
+    $(selector).focus(); // Maybe not Angular way but much simpler: https://stackoverflow.com/questions/14833326/how-to-set-focus-on-input-field
+  }
 
 
-  let makeRequest = function(url) {
+  function makeRequest(url) {
     let defer = $q.defer();
 
     // Full good file: https://polished-silence-366.fly.dev/verify?url=https://gateway.pinata.cloud/ipfs/QmVFST2tbVR6bokaMYXPxJJQXELwLfqWSrRaBgZqwaQT7Y/wallet.asicev
@@ -93,16 +96,33 @@ app.controller("DemoCtrl", function($scope, $http, $q) {
       return defer.promise;
   }
 
+  async function ethEnabled() {
+    if (window.ethereum) {
+      window.web3 = new Web3(window.ethereum);
+      let result = await window.ethereum.enable();
+      return result;
+    }
 
+    alert("Please ensure that you have MetaMask installed, we suggest Chrome or Brave");
+    return false;
+  }
 
-
+  var saveData = (function () {
+    var a = document.createElement("a");
+    document.body.appendChild(a);
+    a.style = "display: none";
+    return function (data, fileName) {
+        var json = JSON.stringify(data),
+            blob = new Blob([json], {type: "octet/stream"}),
+            url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = fileName;
+        a.click();
+        window.URL.revokeObjectURL(url);
+    };
+  }());
 
 });
-
-
-
-
-
 
 // https://stackoverflow.com/a/19647381/775359
 app.directive('customOnChange', function() {
@@ -122,29 +142,9 @@ app.directive('customOnChange', function() {
 
 
 
-const ethEnabled = () => {
-  if (window.ethereum) {
-    window.web3 = new Web3(window.ethereum);
-    window.ethereum.enable();
-    return true;
-  }
-  return false;
-}
 
-var saveData = (function () {
-  var a = document.createElement("a");
-  document.body.appendChild(a);
-  a.style = "display: none";
-  return function (data, fileName) {
-      var json = JSON.stringify(data),
-          blob = new Blob([json], {type: "octet/stream"}),
-          url = window.URL.createObjectURL(blob);
-      a.href = url;
-      a.download = fileName;
-      a.click();
-      window.URL.revokeObjectURL(url);
-  };
-}());
+
+
 
 
 $("#sendgettodev").on("click", async function() {
