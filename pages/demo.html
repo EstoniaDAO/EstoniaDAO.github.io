@@ -1,161 +1,158 @@
-            {{ message }}
+<!-- Additional Elements -->
+<section class="wrapper style1 align-center">
+    <div class="inner">
+        <h2>Estonia DAO onboarding</h2>
+        <p>To successfully onboard you as as a member we need to know your <strong>ETH address</strong> and <strong>Estonian ID</strong>.</p>
+        <div class="index align-left">
 
+                <section>
+                    <header>
+                        <h3>Step 1</h3>
+                    </header>
+                    <div class="content">
 
-            <!-- Additional Elements -->
-            <section class="wrapper style1 align-center">
-                <div class="inner">
-                    <h2>Estonia DAO onboarding</h2>
-                    <p>To successfully onboard you as as a member we need to know your <strong>ETH address</strong> and <strong>Estonian ID</strong>.</p>
-                    <div class="index align-left">
-
-                            <section>
-                                <header>
-                                    <h3>Step 1</h3>
-                                </header>
-                                <div class="content">
-
-                                    <dl>
-                                        <dt>Your Ethereum address. <a href id="connect">Retrieve from Metamask</a>.</dt>
-                                        <dd>
-                                            <input type="text" id="ethaddress" placeholder="0x007..."><br>
-                                            <p>You can manually paste your ETH address. Metamask method is for pure convenience.</p>
-                                        </dd>
-                                    </dl>
-
-                                </div>
-                            </section>									
-                            <section>
-                                <header>
-                                    <h3>Step 2</h3>
-                                </header>
-                                <div class="content">
-
-                                    <dl>
-                                        <dt>Confirm ownership. <a href id="sign">Sign using Metamask.</a></dt>
-                                        <dd>
-                                            <input type="text" id="signature" placeholder="0x007..."><br>
-                                            <p>Signature is required otherwise you could put any address.</p>
-                                        </dd>
-                                    </dl>
-
-                                </div>
-                            </section>									
-                            <section>
-                                <header>
-                                    <h3>Step 3</h3>
-                                </header>
-                                <div class="content">
-
-                                    <dl>
-                                        <dt><a href id="download">Download the file</a>.</dt>
-                                        <dd>
-
-                                            <pre><code style="line-height: 2.2em;">{
-"address":<span>  </span><span class="emptystep">complete step 1</span>,
-"signature":<span class="emptystep">complete step 2</span>
-}</code></pre>
-
-                                        </dd>
-                                    </dl>
-
-                                </div>
-                            </section>									
-                            <section>
-                                <header>
-                                    <h3>Step 4</h3>
-                                </header>
-                                <div class="content">
-
-                                    <dl>
-                                        <dt>Sign using ID-software on your computer.</dt>
-                                        <dd>
-                                            <p>As an E-Resident you probably have the software / browser extension already installed on your machine.</p>
-                                                
-                                            <p>You can find the Estonian DigiDoc4 ID-software <a href="https://installer.id.ee/?lang=eng">here</a>.</p>
-                                                
-                                            <blockquote>Note: your Estonian ID number and legal name will be included in the signature.</blockquote></p>
-
-                                                
-                                        </dd>
-                                    </dl>
-
-                                </div>
-                            </section>									
-                            <section>
-                                <header>
-                                    <h3>Step 5</h3>
-                                </header>
-                                <div class="content">
-
-                                    <dl>
-                                        <dt>Upload the signed file.</dt>
-                                        <dd>
-                                            <p>The file created in the previous step will be uploaded to IPFS</p>
-
-
-                                            <div id="drop-area">
-                                                <form class="my-form">
-                                                  <p>Upload .asice</p>
-                                                  <input type="file" id="macaroon">
-                                                  <label class="button" for="macaroon">Select the .asice</label>
-                                                </form>
-                                              </div>
-                                          
-                                              <div id="link"></div>
-
-                                              <button id="sendgettodev">send to dev</button><br>
-
-
-                                        </dd>
-                                    </dl>
-
-                                </div>
-                            </section>									
-                            <section>
-                                <header>
-                                    <h3>Step 6</h3>
-                                </header>
-                                <div class="content">
-
-                                    <dl>
-                                        <dt><a href id="sendwebhook">Send to Discord</a>.</dt>
-                                        <dd>
-
-                                            <p>Just click the button and it will automagically post to Discord via webhook.</p>
-
-                                            <p>Verify that it has been posted, join the Discord, say "hi" in the intros channel (if you haven't done it already).</p>
-
-
-                                            <!-- <button id="sendwebhook">send to discord</button><br> -->
-
-                                            
-
-                                        </dd>
-                                    </dl>
-
-                                </div>
-                            </section>									
-                            <section>
-                                <header>
-                                    <h3>Success 🎉</h3>
-                                </header>
-                                <div class="content">
-
-                                    <dl>
-                                        <dt>Our mantra is to simplify...</dt>
-                                        <dd>
-                                            <p>If you know better please check <a href="https://www.notion.so/estoniadao/0a878e2df27544fea76eb1de65a0e46a?v=fb0abefb71eb47e2a7edffb7d62dea83&p=6d72017dde4b469b849b09c1051f6ec7">development squad on Notion</a></p>
-
-                                            <blockquote>Our target audience are E-Residents early adopters with interests in blockchain, cryptocurriences and DAO. We made some compromises, done is better than perfect, it is a hackathon, always be shipping...</blockquote>
-
-                                        </dd>
-                                    </dl>
-
-                                </div>
-                            </section>
+                        <dl>
+                            <dt>Your Ethereum address. <a href id="connect">Retrieve from Metamask</a>.</dt>
+                            <dd>
+                                <input type="text" id="ethaddress" placeholder="0x007..."><br>
+                                <p>You can manually paste your ETH address. Metamask method is for pure convenience.</p>
+                            </dd>
+                        </dl>
 
                     </div>
+                </section>									
+                <section>
+                    <header>
+                        <h3>Step 2</h3>
+                    </header>
+                    <div class="content">
+
+                        <dl>
+                            <dt>Confirm ownership. <a href id="sign">Sign using Metamask.</a></dt>
+                            <dd>
+                                <input type="text" id="signature" placeholder="0x007..."><br>
+                                <p>Signature is required otherwise you could put any address.</p>
+                            </dd>
+                        </dl>
+
+                    </div>
+                </section>									
+                <section>
+                    <header>
+                        <h3>Step 3</h3>
+                    </header>
+                    <div class="content">
+
+                        <dl>
+                            <dt><a href id="download">Download the file</a>.</dt>
+                            <dd>
+
+                                <pre><code style="line-height: 2.2em;">{
+<span>  </span>"address":<span>  </span><span class="emptystep">complete step 1</span>,
+<span>  </span>"signature":<span class="emptystep">complete step 2</span>
+}</code></pre>
+
+                            </dd>
+                        </dl>
+
+                    </div>
+                </section>									
+                <section>
+                    <header>
+                        <h3>Step 4</h3>
+                    </header>
+                    <div class="content">
+
+                        <dl>
+                            <dt>Sign using ID-software on your computer.</dt>
+                            <dd>
+                                <p>As an E-Resident you probably have the software / browser extension already installed on your machine.</p>
+                                    
+                                <p>You can find the Estonian DigiDoc4 ID-software <a href="https://installer.id.ee/?lang=eng">here</a>.</p>
+                                    
+                                <blockquote>Note: your Estonian ID number and legal name will be included in the signature.</blockquote></p>
+
+                                    
+                            </dd>
+                        </dl>
+
+                    </div>
+                </section>									
+                <section>
+                    <header>
+                        <h3>Step 5</h3>
+                    </header>
+                    <div class="content">
+
+                        <dl>
+                            <dt>Upload the signed file.</dt>
+                            <dd>
+                                <p>The file created in the previous step will be uploaded to IPFS</p>
 
 
-                </div>
-            </section>
+                                <div id="drop-area">
+                                    <form class="my-form">
+                                        <p>Upload .asice</p>
+                                        <input type="file" id="macaroon">
+                                        <label class="button" for="macaroon">Select the .asice</label>
+                                    </form>
+                                    </div>
+                                
+                                    <div id="link"></div>
+
+                                    <button id="sendgettodev">send to dev</button><br>
+
+
+                            </dd>
+                        </dl>
+
+                    </div>
+                </section>									
+                <section>
+                    <header>
+                        <h3>Step 6</h3>
+                    </header>
+                    <div class="content">
+
+                        <dl>
+                            <dt><a href id="sendwebhook">Send to Discord</a>.</dt>
+                            <dd>
+
+                                <p>Just click the button and it will automagically post to Discord via webhook.</p>
+
+                                <p>Verify that it has been posted, join the Discord, say "hi" in the intros channel (if you haven't done it already).</p>
+
+
+                                <!-- <button id="sendwebhook">send to discord</button><br> -->
+
+                                
+
+                            </dd>
+                        </dl>
+
+                    </div>
+                </section>									
+                <section>
+                    <header>
+                        <h3>Success 🎉</h3>
+                    </header>
+                    <div class="content">
+
+                        <dl>
+                            <dt>Our mantra is to simplify...</dt>
+                            <dd>
+                                <p>If you know better please check <a href="https://www.notion.so/estoniadao/0a878e2df27544fea76eb1de65a0e46a?v=fb0abefb71eb47e2a7edffb7d62dea83&p=6d72017dde4b469b849b09c1051f6ec7">development squad on Notion</a></p>
+
+                                <blockquote>Our target audience are E-Residents early adopters with interests in blockchain, cryptocurriences and DAO. We made some compromises, done is better than perfect, it is a hackathon, always be shipping...</blockquote>
+
+                            </dd>
+                        </dl>
+
+                    </div>
+                </section>
+
+        </div>
+
+
+    </div>
+</section>

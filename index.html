@@ -10,75 +10,27 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/signature.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body ng-app="app">
-			<style type="text/css">
-				#wrapper {
-					/*display: none;*/
-				}
-				#drop-area {
-				  border: 2px dashed #ccc;
-				  border-radius: 20px;
-				  width: 190px;
-				  margin: 50px auto;
-				  padding: 20px;
-				}
-				#drop-area.highlight {
-				  border-color: purple;
-				}
-				.button {
-				  display: inline-block;
-				  padding: 10px;
-				  background: #ccc;
-				  cursor: pointer;
-				  border-radius: 5px;
-				  border: 1px solid #ccc;
-				}
-				.button:hover {
-				  background: #ddd;
-				}
-				#macaroon {
-				  display: none;
-				}
-				#macaroon-textarea {
-				  font-family: monospace;
-				  font-size: 0.8em;
-				  width: 240px;
-				  height: 100px;
-				  background-color: #e2e2e2;
-				  filter: blur(3px)
-				}
-				dl dd {
-					margin-left: 0;
-				}
+		<div id="wrapper" class="divided">
 
-				.emptystep {
-					margin-left: 4px;
-					border: 1px solid black;
-					padding: 4px;;
-				}
-			</style>
+			<div ng-view></div>
 
+			<footer class="wrapper style1 align-center">
+				<div class="inner">
+					<ul class="icons">
+						<li><a href="https://twitter.com/estoniadao" class="icon brands style2 fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://discord.gg/rwtWDZ3" class="icon brands style2 fa-discord"><span class="label">Discord</span></a></li>
+						<li><a href="https://github.com/EstoniaDAO/EstoniaDAO.github.io" class="icon brands style2 fa-github"><span class="label">Github</span></a></li>
+						<li><a href="https://www.notion.so/Estonia-DAO-Home-570c0709d2bf40f3821a637bcc7927c6" class="icon brands style2 fa-pied-piper"><span class="label">Notion</span></a></li>
+					</ul>
+					<p style="font-size: 0.7em">&copy; Decentralized. Open Source. Creative Commons. Design: <a href="https://html5up.net">HTML5 UP</a>. Edit this page on <a href="https://github.com/EstoniaDAO/EstoniaDAO.github.io">GitHub</a></p>
+				</div>
+			</footer>
 
-			<div id="wrapper" class="divided">
-
-				<div ng-view></div>
-
-				<!-- Footer -->
-					<footer class="wrapper style1 align-center">
-						<div class="inner">
-							<ul class="icons">
-								<li><a href="https://twitter.com/estoniadao" class="icon brands style2 fa-twitter"><span class="label">Twitter</span></a></li>
-								<li><a href="https://discord.gg/rwtWDZ3" class="icon brands style2 fa-discord"><span class="label">Discord</span></a></li>
-								<li><a href="https://github.com/EstoniaDAO/EstoniaDAO.github.io" class="icon brands style2 fa-github"><span class="label">Github</span></a></li>
-								<li><a href=" https://www.notion.so/Estonia-DAO-Home-570c0709d2bf40f3821a637bcc7927c6" class="icon brands style2 fa-pied-piper"><span class="label">Notion</span></a></li>
-							</ul>
-							<p style="font-size: 0.7em">&copy; Decentralized. Open Source. Creative Commons. Design: <a href="https://html5up.net">HTML5 UP</a>. Edit this page on <a href="https://github.com/EstoniaDAO/EstoniaDAO.github.io">GitHub</a></p>
-						</div>
-					</footer>
-
-			</div>
+		</div>
 
 
 		<!-- Global site tag (gtag.js) - Google Analytics -->
@@ -93,29 +45,29 @@
 
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
 
 
-			<script src="https://unpkg.com/ipfs-http-client@30.1.3/dist/index.js"></script>
-			<script src="https://bundle.run/buffer@5.2.1"></script>
-			<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-			
+		<script src="https://unpkg.com/ipfs-http-client@30.1.3/dist/index.js"></script>
+		<script src="https://bundle.run/buffer@5.2.1"></script>
+		<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+		
 
-			<script src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js'></script>
-			<script src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-route.js'></script>
-			<script src="assets/js/signature.js"></script>
+		<script src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js'></script>
+		<script src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-route.js'></script>
+		<script src="assets/js/signature.js"></script>
 
-    
-			<script src="https://unpkg.com/ipfs-http-client@30.1.3/dist/index.js"></script>
-		    <script src="https://bundle.run/buffer@5.2.1"></script>
-		    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
 
-		    <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+		<script src="https://unpkg.com/ipfs-http-client@30.1.3/dist/index.js"></script>
+		<script src="https://bundle.run/buffer@5.2.1"></script>
+		<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+
+		<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 
 	</body>
 </html>
