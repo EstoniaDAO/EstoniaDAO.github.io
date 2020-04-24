@@ -10,63 +10,131 @@ app.config(function ($routeProvider) {
         var myearth;
         var sprites = [];
 
-        // window.addEventListener( 'load', function() {
+        var photos = [
+          { location: { lat: 28.7, lng: 82.6 }, src: 'http://genesis.re/www/images/mars-robertson.jpg' },
+          { location: { lat: -2.9, lng: 38.4 }, src: 'http://genesis.re/www/images/mars-robertson.jpg' },
+          { location: { lat: 64.0, lng: -19.7 }, src: 'http://genesis.re/www/images/mars-robertson.jpg' },
+          { location: { lat: 9.5, lng: 99.9 }, src: 'http://genesis.re/www/images/mars-robertson.jpg' },
+          { location: { lat: -38.6, lng: 143.7 }, src: 'http://genesis.re/www/images/mars-robertson.jpg' },
+          { location: { lat: 46.7, lng: 9.8 }, src: 'http://genesis.re/www/images/mars-robertson.jpg' },
+          { location: { lat: 37.7, lng: -119.5 }, src: 'http://genesis.re/www/images/mars-robertson.jpg' },
+          { location: { lat: 19.5, lng: -155.6 }, src: 'http://genesis.re/www/images/mars-robertson.jpg' },
+          { location: { lat: 34.6, lng: 135.4 }, src: 'http://genesis.re/www/images/mars-robertson.jpg' },
+          { location: { lat: 24.2, lng: -77.8 }, src: 'http://genesis.re/www/images/mars-robertson.jpg' },
+          { location: { lat: -13.1, lng: -72.5 }, src: 'http://genesis.re/www/images/mars-robertson.jpg' },
+        ];
 
-          myearth = new Earth( document.getElementById('myearth'), {
-          
-            light: 'none',
-            
-            texture: 'hologram/hologram-map.svg',
-            transparent: true,
-            
-            location: { lat: 0, lng : 0 },
-            
-            autoRotate : true,
-            autoRotateSpeed: 1.2,
-            autoRotateDelay: 100,
-            autoRotateStart: 2000,			
-            
-          } );
-          
-          
-          myearth.addEventListener( "ready", function() {
+        myearth = new Earth( document.getElementById('myearth'), {
         
-            this.startAutoRotate();
-            
-            // connections
-            
-            var line = {
-              color : 'white',
-              opacity: 0.2,
-              hairline: true,
+          light: 'none',
+          
+          texture: 'hologram/hologram-map.svg',
+          transparent: true,
+          
+          location: { lat: 0, lng : 0 },
+          
+          autoRotate : true,
+          autoRotateSpeed: 1.2,
+          autoRotateDelay: 100,
+          autoRotateStart: 2000,			
+          
+        } );
+        
+        
+        myearth.addEventListener( "ready", function() {
+      
+          this.startAutoRotate();
+          
+          // connections
+          
+          var line = {
+            color : 'white',
+            opacity: 0.2,
+            hairline: true,
+            offset: -0.5
+          };
+          
+          // for ( var i in connections ) {			
+          // 	line.locations = [ { lat: connections[i][0], lng: connections[i][1] }, { lat: connections[i][2], lng: connections[i][3] } ];
+          // 	this.addLine( line );
+          // }
+          
+          
+          
+          // add 5 shine sprites
+          
+          for ( var i=0; i < 5; i++ ) {
+            sprites[i] = this.addSprite( {
+              image: 'hologram/hologram-shine.svg',
+              scale: 0.01,
               offset: -0.5
-            };
+            } );
+            pulse( i );
+            //setTimeout( function() { pulse( 1 ); }, 300 );
+          }
+
+
+          // add photo overlay
+              
+          photo_overlay = this.addOverlay( {
+            content: `<div id="photo" style="font-size: 1.2em">
+                        <div id="close-photo" onclick="closePhoto(); event.stopPropagation();"></div>
+                        <p>
+                          Hire me, buy my tokens, send ETH to <code>dearmoon.eth</code><br>
+                          10% voluntary tax to Estonia DAO UBI pool, winning Nobel Prize in Economics<br>
+                          Check the game-theory incentives on <a href="https://docs.google.com/document/d/1AR4npthWvszwFqXmwJ1QMvgAu4hgyquThzphOk0kVfY/edit#">Google Doc</a>
+                        </p>
+                      </div>`,
+            visible: false,
+            elementScale: 1,
+            depthScale: 0.5
+          } );	
+
+
+          // add photo pins
+
+          for ( var i=0; i < photos.length; i++ ) {
+
+            var marker = this.addMarker( {
             
-            // for ( var i in connections ) {			
-            // 	line.locations = [ { lat: connections[i][0], lng: connections[i][1] }, { lat: connections[i][2], lng: connections[i][3] } ];
-            // 	this.addLine( line );
-            // }
+              mesh : "Marker",
+              color: (i % 2 == 0) ? '#3a6a39' : '#6a5739',
+              location : photos[i].location,
+              scale: 0.01,
+              offset: 1.6,
+              visible: false,
+              transparent: true,
+              hotspotRadius : 0.6,
+              hotspotHeight : 1.25,						
+              
+              // custom property
+              photo_info: photos[i]
+              
+            } );
             
+            marker.addEventListener('click', openPhoto);
             
+            setTimeout( (function() {
+              this.visible = true;
+              this.animate( 'scale', 1, { duration: 140 } );
+              this.animate( 'offset', 0, { duration: 1100, easing: 'bounce' } );
+            }).bind(marker), 300 * i );
             
-            // add 5 shine sprites
-            
-            for ( var i=0; i < 5; i++ ) {
-              sprites[i] = this.addSprite( {
-                image: 'hologram/hologram-shine.svg',
-                scale: 0.01,
-                offset: -0.5
-              } );
-              pulse( i );
-              //setTimeout( function() { pulse( 1 ); }, 300 );
-            }
-            
-            
-          } );
+          }
           
           
-        // } );
+        } );
         
+        myearth.addEventListener( "change", function() {
+		
+          if ( ! current_marker || auto_rotate ) return;
+      
+          if ( Earth.getAngle( myearth.location, current_marker.location ) > 45 ) {
+            closePhoto();
+          }
+          
+        } );         
+
         
         function getRandomInt(min, max) {
           min = Math.ceil(min);
@@ -147,7 +215,57 @@ app.config(function ($routeProvider) {
           [55.5914993286,37.2615013123, 25.2527999878,55.3643989563],
         ];
         
+        var current_marker, auto_rotate;
 
+
+        function openPhoto() {
+        
+          // close current photo
+          if ( current_marker ) {
+            
+            closePhoto();
+            window.setTimeout( openPhoto.bind(this), 120 );
+            
+            return;
+          }
+          
+          // rotate earth if needed
+          if ( myearth.goTo( this.location, { relativeDuration: 100, approachAngle: 12, end: function(){auto_rotate=false;} } ) ) {
+            auto_rotate = true;
+          }
+          
+          
+          document.getElementById('photo').style.backgroundImage = "url("+ this.photo_info.src +")";
+          
+          photo_overlay.location = this.location;
+          photo_overlay.visible = true;
+          
+          setTimeout( function(){
+            document.getElementById('photo').className = 'photo-appear';
+          }, 120);
+          
+          this.animate( 'scale', 0.001, { duration: 150 } );
+          current_marker = this;
+          
+        }
+        
+        function closePhoto() {
+        
+          if ( ! current_marker ) return;
+          
+          document.getElementById('photo').className = '';
+          
+          setTimeout( (function(){
+            document.getElementById('photo').style.backgroundImage = 'none';
+            photo_overlay.visible = false;
+            this.opacity = 0.7;
+            this.animate( 'scale', 1, { duration: 150 } );
+          }).bind(current_marker), 100 );
+          
+          current_marker = false;
+          
+        }
+        
 
 
       }

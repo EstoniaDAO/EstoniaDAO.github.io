@@ -67,7 +67,41 @@
 		<script src="https://bundle.run/buffer@5.2.1"></script>
 		<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
 
-		<script src="hologram/miniature.earth.core.js"></script>
+		<script src="hologram/miniature.earth.js"></script>
+		<!-- <script src="hologram/miniature.earth.core.js"></script> -->
+
+		<style>
+			#photo {
+				position: absolute;
+				left: -180px;
+				top: -180px;
+				width: 360px;
+				height: 360px;
+				background: black center center no-repeat;
+				background-size: cover;
+				border-radius: 4px;
+				filter: drop-shadow(0 2px 8px RGBA(0,0,0,0.5));
+				transform: scale(0.001);
+				transition: transform 0.1s ease-out;
+			}
+			#photo.photo-appear {
+				transition: transform 0.15s ease-out;
+				transform: scale(1);
+			}
+
+			#close-photo {
+				position: absolute;
+				right: 2px;
+				top: 2px;
+				width: 32px;
+				height: 32px;
+				background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMjQgMjAuMTg4bC04LjMxNS04LjIwOSA4LjItOC4yODItMy42OTctMy42OTctOC4yMTIgOC4zMTgtOC4zMS04LjIwMy0zLjY2NiAzLjY2NiA4LjMyMSA4LjI0LTguMjA2IDguMzEzIDMuNjY2IDMuNjY2IDguMjM3LTguMzE4IDguMjg1IDguMjAzeiIvPjwvc3ZnPg) center center no-repeat;
+				background-size: 16px 16px;
+				filter: drop-shadow(0 0 3px black);
+				cursor: pointer;
+				pointer-events: all;
+			}
+		</style>
 
 		<!-- <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script> -->
 
