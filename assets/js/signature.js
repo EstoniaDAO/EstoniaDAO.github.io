@@ -2,11 +2,18 @@ var app = angular.module("app", ["ngRoute"]);
 
 const ipfs = window.IpfsHttpClient('ipfs.infura.io', '5001', { protocol: 'https' });
 
+var current_marker, auto_rotate;
+
 app.config(function ($routeProvider) {
   $routeProvider
     .when('/', {
       templateUrl: 'pages/home.html',
       controller: function($scope) {
+
+        if (window.location.search === "?map") {
+          $("#myearth").show();
+        }
+
         var myearth;
         var sprites = [];
 
@@ -78,11 +85,10 @@ app.config(function ($routeProvider) {
               
           photo_overlay = this.addOverlay( {
             content: `<div id="photo" style="font-size: 1.2em">
+                        <img id="img-src">
                         <div id="close-photo" onclick="closePhoto(); event.stopPropagation();"></div>
                         <p>
-                          Hire me, buy my tokens, send ETH to <code>dearmoon.eth</code><br>
-                          10% voluntary tax to Estonia DAO UBI pool, winning Nobel Prize in Economics<br>
-                          Check the game-theory incentives on <a href="https://docs.google.com/document/d/1AR4npthWvszwFqXmwJ1QMvgAu4hgyquThzphOk0kVfY/edit#">Google Doc</a>
+                          Hire me, buy my tokens, send ETH to <code>dearmoon.eth</code> 10% voluntary tax to Estonia DAO UBI pool, winning Nobel Prize in Economics. Check the game-theory incentives on <a href="https://docs.google.com/document/d/1AR4npthWvszwFqXmwJ1QMvgAu4hgyquThzphOk0kVfY/edit#">Google Doc</a>
                         </p>
                       </div>`,
             visible: false,
@@ -215,7 +221,7 @@ app.config(function ($routeProvider) {
           [55.5914993286,37.2615013123, 25.2527999878,55.3643989563],
         ];
         
-        var current_marker, auto_rotate;
+        
 
 
         function openPhoto() {
@@ -235,7 +241,8 @@ app.config(function ($routeProvider) {
           }
           
           
-          document.getElementById('photo').style.backgroundImage = "url("+ this.photo_info.src +")";
+          // document.getElementById('photo').style.backgroundImage = "url("+ this.photo_info.src +")";
+          document.getElementById('img-src').src = this.photo_info.src;
           
           photo_overlay.location = this.location;
           photo_overlay.visible = true;
@@ -248,24 +255,7 @@ app.config(function ($routeProvider) {
           current_marker = this;
           
         }
-        
-        function closePhoto() {
-        
-          if ( ! current_marker ) return;
-          
-          document.getElementById('photo').className = '';
-          
-          setTimeout( (function(){
-            document.getElementById('photo').style.backgroundImage = 'none';
-            photo_overlay.visible = false;
-            this.opacity = 0.7;
-            this.animate( 'scale', 1, { duration: 150 } );
-          }).bind(current_marker), 100 );
-          
-          current_marker = false;
-          
-        }
-        
+            
 
 
       }
@@ -276,6 +266,23 @@ app.config(function ($routeProvider) {
     })
     .otherwise('/')
 });
+
+function closePhoto() {
+        
+  if ( ! current_marker ) return;
+  
+  document.getElementById('photo').className = '';
+  
+  setTimeout( (function(){
+    document.getElementById('photo').style.backgroundImage = 'none';
+    photo_overlay.visible = false;
+    this.opacity = 0.7;
+    this.animate( 'scale', 1, { duration: 150 } );
+  }).bind(current_marker), 100 );
+  
+  current_marker = false;
+  
+}
 
 app.controller("DemoCtrl", function($scope, $http, $q) {
 
