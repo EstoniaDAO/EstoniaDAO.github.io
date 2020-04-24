@@ -1,0 +1,53 @@
+html,
+body {
+	margin: 0;
+	padding: 0;
+	background: #0e120f;
+	color: white;
+	font-family: sans-serif;
+}
+
+
+#myearth {
+	width: 100%;
+	height: 100vh;
+	max-height: 100vw;
+	overflow: hidden;
+}
+
+#myearth canvas {
+	filter: brightness(0);
+	transform: scale(0.8);
+	transition: filter 3.5s ease-in-out, transform 1.5s ease-in-out;
+}
+#myearth.earth-ready canvas {
+	filter: none;
+	transform: none;
+}
+
+#myearth::before {
+	content: none;
+}
+
+
+/* background glow */
+
+#glow {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 100%;
+	max-width: 100vh;
+	height: 100vh;
+	max-height: 100vw;
+	transform: translate(-50%, -50%);
+	
+	background: radial-gradient(ellipse at center, rgba(0,156,255,0) 33%,rgba(0,156,255,0.12) 52%,rgba(0,156,255,0.05) 54%,rgba(0,156,255,0) 70%);
+	z-index: 200;
+	pointer-events: none;
+	opacity: 0;
+	transition: opacity 4s ease-in-out;
+}
+#myearth.earth-ready #glow {
+	opacity: 1;
+}
