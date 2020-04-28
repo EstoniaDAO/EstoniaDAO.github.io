@@ -16,6 +16,11 @@
 	<body ng-app="app">
 		<div id="wrapper" class="divided">
 
+			<script type="text/javascript">
+				if(location.protocol.indexOf("file") !== -1) {
+					alert("Cannot run as file, need to run webserver:`python -m SimpleHTTPServer`");
+				}
+			</script>
 			<div ng-view></div>
 
 			<footer class="wrapper style1 align-center">
