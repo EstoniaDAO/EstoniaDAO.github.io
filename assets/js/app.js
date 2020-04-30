@@ -65,6 +65,58 @@ app.controller("HomeCtrl", function($scope) {
             let merged = {...result2, ...profile};
             $scope.results.push(merged);
             console.log($scope.results);
+
+            
+// 0: "0x315f80C7cAaCBE7Fb1c14E65A634db89A33A9637"
+// 1: "0x315f80C7cAaCBE7Fb1c14E65A634db89A33A9637"
+// 2: "0xF4bCd3FEC3e330054603F329FA54CfDa6171e619"
+// 3: "mars2"
+// 4: "estoniaropsten"
+// 5: "10000"
+// beneficiary: "0x315f80C7cAaCBE7Fb1c14E65A634db89A33A9637"
+// deployed: "0xF4bCd3FEC3e330054603F329FA54CfDa6171e619"
+// deployer: "0x315f80C7cAaCBE7Fb1c14E65A634db89A33A9637"
+// domain: "estoniaropsten"
+// emoji: "🌈"
+// image: [{…}]
+// name: "Hack the planet"
+// ppm: "10000"
+// proof_did: "eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NksifQ.eyJpYXQiOjE1ODgyNjk2NDUsImlzcyI6ImRpZDozOmJhZnlyZWliZG9wdDRhaWlkeXZvZXJkMzdndGQ0aXoycm00YnJweTNncGU1c2h3eGVtbHBwdm9tZWJlIn0.Y1mQxrmgI0zwjYY8F5k2NBmUWFTPy3v93TpRAZIQmjGAEBXXcOhwoktWFh414ZHOYCfXQlCr_h1P0SprPvpGVw"
+// subdomain: "mars2"
+
+            var marker = myearthTHIS.addMarker( {
+      
+              mesh : "Marker",
+              color: (i % 2 == 0) ? '#3a6a39' : '#6a5739',
+              location : photos.pop().location,
+              scale: 0.01,
+              offset: 1.6,
+              visible: false,
+              transparent: true,
+              hotspotRadius : 0.6,
+              hotspotHeight : 1.25,						
+              
+              // custom property
+              photo_info: {
+                src: 'https://gateway.ipfs.io/ipfs/' + merged.image[0].contentUrl["/"],
+                name: merged.name,
+                emoji: merged.emoji,
+                subdomain: merged.subdomain,
+                tax: 1000000 / merged.ppm
+              }
+              
+            } );
+            
+            marker.addEventListener('click', openPhoto);
+            
+            setTimeout( (function() {
+              this.visible = true;
+              this.animate( 'scale', 1, { duration: 140 } );
+              this.animate( 'offset', 0, { duration: 1100, easing: 'bounce' } );
+            }).bind(marker), 300 * i );
+
+
+
           })
 
 
@@ -72,6 +124,7 @@ app.controller("HomeCtrl", function($scope) {
 
         });
       }
+
 
 
     });
@@ -123,7 +176,7 @@ app.controller("HomeCtrl", function($scope) {
     autoRotateStart: 2000,			
   } );
   
-  myearthTHIS;
+  window.myearthTHIS = null;
 
   myearth.addEventListener( "ready", function() {
     myearthTHIS = this;
@@ -149,7 +202,9 @@ app.controller("HomeCtrl", function($scope) {
                   <img id="img-src">
                   <div id="close-photo" onclick="closePhoto(); event.stopPropagation();"></div>
                   <p>
-                    Hire me, buy my tokens, send ETH to <code>dearmoon.eth</code> 10% voluntary tax to Estonia DAO UBI pool, winning Nobel Prize in Economics. Check the game-theory incentives on <a href="https://docs.google.com/document/d/1AR4npthWvszwFqXmwJ1QMvgAu4hgyquThzphOk0kVfY/edit#">Google Doc</a>
+                    <span id="photo-name"></span>
+                    <span id="photo-domain"></span>
+                    <span id="photo-tax"></span>
                   </p>
                 </div>`,
       visible: false,
@@ -157,7 +212,7 @@ app.controller("HomeCtrl", function($scope) {
       depthScale: 0.5
     } );	
 
-
+    /*
     // add photo pins
     for ( var i=0; i < photos.length; i++ ) {
 
@@ -187,6 +242,7 @@ app.controller("HomeCtrl", function($scope) {
       }).bind(marker), 300 * i );
       
     }
+    */
     
     
   } );
@@ -297,6 +353,9 @@ app.controller("HomeCtrl", function($scope) {
     
     // document.getElementById('photo').style.backgroundImage = "url("+ this.photo_info.src +")";
     document.getElementById('img-src').src = this.photo_info.src;
+    $('#photo-name').html(this.photo_info.emoji + this.photo_info.name);
+    $('#photo-domain').html("<code>" + this.photo_info.subdomain + "</code>");
+    $('#photo-tax').html(this.photo_info.tax.toFixed(2));
     
     photo_overlay.location = this.location;
     photo_overlay.visible = true;
