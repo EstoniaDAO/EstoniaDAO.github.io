@@ -1,4 +1,6 @@
-window.address = "0x93e08dae8c1ede9c085f404d7162fd19ef7fe513";
+window.TREASURY = "0x614962025820c57d6af5acff56b5879237daf559";
+
+window.address = "0x93e08dae8c1ede9c085f404d7162fd19ef7fe513"; // smart contract with Voluntary Tax factory
 
 window.ABI = [
 	{

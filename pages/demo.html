@@ -134,6 +134,17 @@
                             <dt>Deploy your <code><span ng-hide="subdomain" ng-click="focus('#subdomain')">…</span><span ng-bind="subdomain"></span>.estoniadao.eth</code> subdomain</dt>
                             <dd>
 
+
+
+                                <!-- <form ng-submit="deploy()">
+                                    <input ng-model="ppm" type="number"><br>
+                                    <input ng-model="treasury"><br>
+                                    <input ng-model="beneficiary"><br>
+                                    <input ng-model="subdomain"><br>
+                                    <input ng-model="domain"><br>
+                                    <input type="submit" value="deploy">
+                                </form> -->
+
                                 <input type="text" placeholder="subdomain" ng-model="subdomain" id="subdomain"><br>
                                 <p>This will be your easy, memorable name for the voluntary tax UBI.</p>
                                 <p>We are aiming for Nobel Price in Economics with our inventive incentive design structure. Check the <a href="https://docs.google.com/document/d/1AR4npthWvszwFqXmwJ1QMvgAu4hgyquThzphOk0kVfY/edit#">Google Doc</a>. It pays off to be a cool kid drinking cool aid, it's positive sum game where everyone wins!</p>
@@ -143,6 +154,8 @@
 
                                 <button ng-click="deploy()">Deploy</button>
                                 <h1 style="font-size: 2.4em; margin-top: 10px;">⚡️⚡️⚡️</h1>
+
+                                <pre ng-show="message">{{ message }}</pre>
 
                             </dd>
                         </dl>
