@@ -10,6 +10,47 @@ app.config(function ($routeProvider) {
       templateUrl: 'pages/home.html',
       controller: function($scope) {
 
+        // Some code duplication
+        $scope.connect = async function() {
+          let address = await ethEnabled();
+          accounts = await web3.eth.getAccounts()
+          $scope.address = address[0] || accounts[0]
+          $scope.$apply();
+        }
+
+        $scope.ppm = 10000;
+        $scope.beneficiary = "0x85A363699C6864248a6FfCA66e4a1A5cCf9f5567";
+        $scope.treasury = "0x614962025820c57d6af5acff56b5879237daf559";
+        $scope.domain = "estoniaropsten";
+        $scope.subdomain = "hackerman651";
+
+        $scope.deploy = async function() {
+
+          await $scope.connect();
+
+          if (typeof web3 !== 'undefined') {
+            web3 = new Web3(web3.currentProvider);
+          } else {
+            web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/hi8olE2lF8OqjyBSdtSm "));
+          }
+
+          
+
+          contract = new web3.eth.Contract(ABI, address);
+
+          deployed = contract.methods.deployNew($scope.ppm, $scope.beneficiary, $scope.treasury, $scope.domain, $scope.subdomain)
+                             .send({from: accounts[0]}, function(response) {
+                                console.log(response);
+                             })
+          
+          // , function (error, response) {
+          //   console.log(response);
+          //   console.error(error)
+          // })
+
+        }
+
+
         if (window.location.search === "?map") {
           $("#myearth").show();
         }
@@ -46,7 +87,6 @@ app.config(function ($routeProvider) {
           autoRotateStart: 2000,			
           
         } );
-        
         
         myearth.addEventListener( "ready", function() {
       
@@ -141,13 +181,11 @@ app.config(function ($routeProvider) {
           
         } );         
 
-        
         function getRandomInt(min, max) {
           min = Math.ceil(min);
           max = Math.floor(max);
           return Math.floor(Math.random() * (max - min)) + min;
         }
-        
         
         function pulse( index ) {
           var random_location = connections[ getRandomInt(0, connections.length-1) ];
@@ -159,7 +197,6 @@ app.config(function ($routeProvider) {
             } });
           } });
         }
-        
         
         var connections = [
           [59.651901245117,17.918600082397,	41.8002778,12.2388889],
@@ -221,9 +258,6 @@ app.config(function ($routeProvider) {
           [55.5914993286,37.2615013123, 25.2527999878,55.3643989563],
         ];
         
-        
-
-
         function openPhoto() {
         
           // close current photo
@@ -256,8 +290,6 @@ app.config(function ($routeProvider) {
           
         }
             
-
-
       }
     })
     .when('/demo', {
@@ -382,17 +414,6 @@ app.controller("DemoCtrl", function($scope, $http, $q) {
       return defer.promise;
   }
 
-  async function ethEnabled() {
-    if (window.ethereum) {
-      window.web3 = new Web3(window.ethereum);
-      let result = await window.ethereum.enable();
-      return result;
-    }
-
-    alert("Please ensure that you have MetaMask installed, we suggest Chrome or Brave");
-    return false;
-  }
-
   var saveData = (function () {
     var a = document.createElement("a");
     document.body.appendChild(a);
@@ -440,3 +461,14 @@ app.directive('customOnChange', function() {
     }
   };
 });
+
+async function ethEnabled() {
+  if (window.ethereum) {
+    window.web3 = new Web3(window.ethereum);
+    let result = await window.ethereum.enable();
+    return result;
+  }
+
+  alert("Please ensure that you have MetaMask installed, we suggest Chrome or Brave");
+  return false;
+}
