@@ -13,7 +13,7 @@
                         <iframe src="https://estoniadao.substack.com/embed" width="480" height="320" style="border:1px solid #EEE; background:white; max-width: 100%;" frameborder="0" scrolling="no"></iframe>
 
 
-                        <p>You can also view the knowledge base on <a href=" https://www.notion.so/Estonia-DAO-Home-570c0709d2bf40f3821a637bcc7927c6">Notion</a>. View the members <a href="https://estoniadao.org/TheSource/timeline/@estoniadao/">KUDOS leaderboard</a>. Fund the <a href="https://gitcoin.co/grants/659/estonia-dao-aragon-integration">Gitcoin grant</a>, capture <a href="https://explorer.bounties.network/bounty/3930">wallet</a> and <a href="https://explorer.bounties.network/bounty/3944">logo</a> bounty, comment on the <a href="https://docs.google.com/document/d/1AR4npthWvszwFqXmwJ1QMvgAu4hgyquThzphOk0kVfY/edit#">UBI spec</a> or visit <a href="https://hackathon.metacartel.org/">MetaCartel Dragon Quest</a> where it all began.</p>
+                        <p>Try the <a href="#/demo">demo</a>. You can also view the knowledge base on <a href=" https://www.notion.so/Estonia-DAO-Home-570c0709d2bf40f3821a637bcc7927c6">Notion</a>. View the members <a href="https://estoniadao.org/TheSource/timeline/@estoniadao/">KUDOS leaderboard</a>. Fund the <a href="https://gitcoin.co/grants/659/estonia-dao-aragon-integration">Gitcoin grant</a>, capture <a href="https://explorer.bounties.network/bounty/3930">wallet</a> and <a href="https://explorer.bounties.network/bounty/3944">logo</a> bounty, comment on the <a href="https://docs.google.com/document/d/1AR4npthWvszwFqXmwJ1QMvgAu4hgyquThzphOk0kVfY/edit#">UBI spec</a> or visit <a href="https://hackathon.metacartel.org/">MetaCartel Dragon Quest</a> where it all began.</p>
 
 
 <!-- 							<ul class="actions stacked">
@@ -103,6 +103,22 @@
                             <input ng-model="domain"><br>
                             <input type="submit" value="deploy">
                         </form>
+
+
+                        <div style="padding: 5px 100px;">
+                            <!-- Get Profile Div -->
+                            <div style="padding: 0px 0px 25px 0px;">
+                              <h2> Get Profile </h2>
+                      
+                              <input type="text" id="ethAddr" placeholder="Ethereum Address" ng-model="address">
+                              <button id="getProfile" type="button" class="btn btn-primary" ng-click="getData()">Get Profile Data</button>
+                      
+                              <h5 style="padding: 20px 0px 10px 0px"> Profile: </h5>
+                              <p>
+                                <span id="getProfileData"></span>
+                              </p>
+                            </div>
+                        </div>
 
 
 

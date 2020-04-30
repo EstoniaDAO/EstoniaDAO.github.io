@@ -1,7 +1,7 @@
 <!-- Additional Elements -->
 <section class="wrapper style1 align-center">
     <div class="inner">
-        <h2>Estonia DAO onboarding</h2>
+        <h2>3Box edit profile</h2>
         <p>To successfully onboard you as a new member we will need to verify your <strong>Ethereum address</strong> and <strong>Estonian ID</strong>.</p>
         <div class="index align-left">
 
@@ -87,9 +87,7 @@
                         <dl>
                             <dt>Upload the signed file.</dt>
                             <dd>
-                                <p>The file created in the previous step will be uploaded to IPFS and if signature is correct it will posted to Discord.</p>
-
-                                <p>At the latest (Thu 30 Apr 2020) legal call we have discussed GDPR implications and we are actively working to mitigate.</p>
+                                <p>The file created in the previous step will be uploaded to IPFS</p>
 
                                 <input type="file" custom-on-change="uploadFile"><br>
 
@@ -116,89 +114,22 @@
                                 <div ng-show="signatureValid === false">
                                     <p><strong>Something went wrong when verifying signature.</strong></p>
                                     <pre>{{ signatureData }}</pre>
-                                </div>                                    
+                                </div>
+
+                                <br>
+                                <br>
+                                <br>
+
+                                <p><a href="/">Back to homepage</a>.</p>
+                                    
+
                             
                             </dd>
                         </dl>
 
                     </div>
-                </section>
-
-                <section>
-                    <header>
-                        <h3>Step 6</h3>
-                    </header>
-                    <div class="content">
-
-                        <dl>
-                            <dt>Deploy your <code><span ng-hide="subdomain" ng-click="focus('#subdomain')">…</span><span ng-bind="subdomain"></span>.estoniadao.eth</code> subdomain</dt>
-                            <dd>
-
-                                <input type="text" placeholder="subdomain" ng-model="subdomain" id="subdomain"><br>
-                                <p>This will be your easy, memorable name for the voluntary tax UBI.</p>
-                                <p>We are aiming for Nobel Price in Economics with our inventive incentive design structure. Check the <a href="https://docs.google.com/document/d/1AR4npthWvszwFqXmwJ1QMvgAu4hgyquThzphOk0kVfY/edit#">Google Doc</a>. It pays off to be a cool kid drinking cool aid, it's positive sum game where everyone wins!</p>
-                                <input type="number" min=0 max=100 step=1 placeholder="voluntary tax rate" ng-model="taxrate" id="taxrate"><br>
-                                
-                                <br>
-
-                                <button ng-click="deploy()">Deploy</button>
-                                <h1 style="font-size: 2.4em; margin-top: 10px;">⚡️⚡️⚡️</h1>
-
-                            </dd>
-                        </dl>
-
-                        <br>
-
-                        
-        
-
-                    </div>
-                </section>
-
-                <section>
-                    <header>
-                        <h3>Step 7</h3>
-                    </header>
-                    <div class="content">
-
-                        <dl>
-                            <dt>Pimp your 3Box profile 🦄</dt>
-                            <dd>
-
-                                <p><strong>TODO:</strong> this is work in progress. For now please use <a href="https://3box.github.io/3box-profile-edit-react/examples/dist/">the standalone demo</a>.
-                                <br>
-                                Soon you'll be able to customize your appearance on the map!</p>
-
-                            </dd>
-                        </dl>
-
-                        <br>
-                        <br>
-                        <br>
-        
-                        
-                        <p><a href="/">Back to homepage</a>.</p>
-
-                    </div>
                 </section>		
-
-
-
-
-
-
-                
 
         </div>
     </div>
 </section>
-
-
-
-<!-- <dl>
-    <dt>Your Ethereum address. <a href ng-click="connect()">Retrieve from Metamask</a>.</dt>
-    <dd>
-        <input type="text" placeholder="0x007..." ng-model="address" id="address"><br>
-        <p>You can manually paste your ETH address. Metamask method is for pure convenience.</p>
-    </dd>
-</dl> -->

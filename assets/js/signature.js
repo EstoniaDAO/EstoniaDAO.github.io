@@ -10,7 +10,15 @@ app.config(function ($routeProvider) {
       templateUrl: 'pages/home.html',
       controller: function($scope) {
 
-        // Some code duplication
+        // No idea where to put it, hackathon last minute quality
+        if (typeof web3 !== 'undefined') {
+          web3 = new Web3(web3.currentProvider);
+        } else {
+          web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/hi8olE2lF8OqjyBSdtSm "));
+        }
+        contract = new web3.eth.Contract(ABI, address);
+
+        // Some code duplication (see other controller, it just works, live with it)
         $scope.connect = async function() {
           let address = await ethEnabled();
           accounts = await web3.eth.getAccounts()
@@ -25,30 +33,61 @@ app.config(function ($routeProvider) {
         $scope.subdomain = "hackerman651";
 
         $scope.deploy = async function() {
-
           await $scope.connect();
-
-          if (typeof web3 !== 'undefined') {
-            web3 = new Web3(web3.currentProvider);
-          } else {
-            web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/hi8olE2lF8OqjyBSdtSm "));
-          }
-
-          
-
-          contract = new web3.eth.Contract(ABI, address);
-
           deployed = contract.methods.deployNew($scope.ppm, $scope.beneficiary, $scope.treasury, $scope.domain, $scope.subdomain)
                              .send({from: accounts[0]}, function(response) {
                                 console.log(response);
                              })
-          
-          // , function (error, response) {
-          //   console.log(response);
-          //   console.error(error)
+        }
+
+        $scope.results = []
+
+        function retrieveData() {
+          contract.methods.getCount($scope.treasury).call().then(function(result) { 
+            console.log(result) 
+
+            for (let i=0; i<result; i++) {
+              contract.methods.voluntaryTaxDeployments($scope.treasury , i).call().then(function(result2) {
+
+                window.Box.getProfile(result2.deployer, {}).then(profile => {
+                  // console.log(profile)
+                  // Object.entries(profile).map(kv => {
+                  //   getProfileData.innerHTML += kv[0] + ': ' + kv[1] + '<br />'
+                  // })
+
+                  let merged = {...result2, ...profile};
+                  $scope.results.push(merged);
+                  console.log($scope.results);
+                })
+
+
+
+
+              });
+            }
+
+
+          });
+        }
+        retrieveData();
+
+
+        $scope.getData = function() {
+
+
+          // getProfile.addEventListener('click', () => {
+          //   console.log(ethAddr.value)
+            window.Box.getProfile($scope.address, {}).then(profile => {
+              console.log(profile)
+              Object.entries(profile).map(kv => {
+                getProfileData.innerHTML += kv[0] + ': ' + kv[1] + '<br />'
+              })
+            })
           // })
 
+
         }
+
 
 
         if (window.location.search === "?map") {
@@ -296,6 +335,10 @@ app.config(function ($routeProvider) {
       templateUrl: 'pages/demo.html',
       controller: "DemoCtrl"
     })
+    .when('/edit', {
+      templateUrl: 'pages/edit.html',
+      controller: "EditCtrl"
+    })
     .otherwise('/')
 });
 
@@ -317,6 +360,8 @@ function closePhoto() {
 }
 
 app.controller("DemoCtrl", function($scope, $http, $q) {
+
+  $scope.taxrate = 1;
 
   $scope.connect = async function() {
     let address = await ethEnabled();
@@ -341,6 +386,13 @@ app.controller("DemoCtrl", function($scope, $http, $q) {
       "signature": $scope.signature
     }
     saveData(data, "wallet.json");
+  }
+
+  $scope.deploy = function() {
+    if (!$scope.subdomain) {
+      alert("Please ensure you selected a subdomain.")
+      return;
+    }   
   }
 
   $scope.uploadFile = function(event) {

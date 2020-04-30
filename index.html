@@ -76,6 +76,14 @@
 		<script src="hologram/miniature.earth.js"></script>
 		<!-- <script src="hologram/miniature.earth.core.js"></script> -->
 
+		<script src="https://unpkg.com/3box/dist/3box.js"></script>
+		<script>
+			// https://github.com/3box/3box-js/blob/develop/example/index.js#L7
+			Box.create(window.ethereum).then(box => {
+			  window.box = box
+			})
+		</script>
+
 		<style>
 
 			#img-src {
