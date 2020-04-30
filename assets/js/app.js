@@ -102,7 +102,7 @@ app.controller("HomeCtrl", function($scope) {
                 name: merged.name,
                 emoji: merged.emoji,
                 subdomain: merged.subdomain,
-                tax: 1000000 / merged.ppm
+                tax:  merged.ppm / 10000
               }
               
             } );
@@ -353,9 +353,9 @@ app.controller("HomeCtrl", function($scope) {
     
     // document.getElementById('photo').style.backgroundImage = "url("+ this.photo_info.src +")";
     document.getElementById('img-src').src = this.photo_info.src;
-    $('#photo-name').html(this.photo_info.emoji + this.photo_info.name);
-    $('#photo-domain').html("<code>" + this.photo_info.subdomain + "</code>");
-    $('#photo-tax').html(this.photo_info.tax.toFixed(2));
+    $('#photo-name').html("<h3 style='font-weight:bold; font-size: 1.2em'>" + this.photo_info.emoji + this.photo_info.name + "</h3>");
+    $('#photo-domain').html("<code>" + this.photo_info.subdomain + ".estoniaropsten.eth</code><br>");
+    $('#photo-tax').html("Voluntary tax: " + this.photo_info.tax.toFixed(2) + "%");
     
     photo_overlay.location = this.location;
     photo_overlay.visible = true;
