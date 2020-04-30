@@ -62,11 +62,6 @@ app.controller("HomeCtrl", function($scope) {
         contract.methods.voluntaryTaxDeployments(TREASURY , i).call().then(function(result2) {
 
           window.Box.getProfile(result2.deployer, {}).then(profile => {
-            // console.log(profile)
-            // Object.entries(profile).map(kv => {
-            //   getProfileData.innerHTML += kv[0] + ': ' + kv[1] + '<br />'
-            // })
-
             let merged = {...result2, ...profile};
             $scope.results.push(merged);
             console.log($scope.results);
@@ -85,8 +80,6 @@ app.controller("HomeCtrl", function($scope) {
 
 
   $scope.getData = function() {
-
-
     // getProfile.addEventListener('click', () => {
     //   console.log(ethAddr.value)
       window.Box.getProfile($scope.address, {}).then(profile => {
@@ -96,11 +89,7 @@ app.controller("HomeCtrl", function($scope) {
         })
       })
     // })
-
-
   }
-
-
 
   if (window.location.search === "?map") {
     $("#myearth").show();
@@ -124,43 +113,24 @@ app.controller("HomeCtrl", function($scope) {
   ];
 
   myearth = new Earth( document.getElementById('myearth'), {
-  
+    location: { lat: 30, lng: 60 },
     light: 'none',
-    
     texture: 'hologram/hologram-map.svg',
-    transparent: true,
-    
-    location: { lat: 0, lng : 0 },
-    
+    transparent: true,   
     autoRotate : true,
     autoRotateSpeed: 1.2,
     autoRotateDelay: 100,
     autoRotateStart: 2000,			
-    
   } );
   
+  myearthTHIS;
+
   myearth.addEventListener( "ready", function() {
+    myearthTHIS = this;
 
     this.startAutoRotate();
     
-    // connections
-    
-    var line = {
-      color : 'white',
-      opacity: 0.2,
-      hairline: true,
-      offset: -0.5
-    };
-    
-    // for ( var i in connections ) {			
-    // 	line.locations = [ { lat: connections[i][0], lng: connections[i][1] }, { lat: connections[i][2], lng: connections[i][3] } ];
-    // 	this.addLine( line );
-    // }
-    
-    
-    
     // add 5 shine sprites
-    
     for ( var i=0; i < 5; i++ ) {
       sprites[i] = this.addSprite( {
         image: 'hologram/hologram-shine.svg',
@@ -189,7 +159,6 @@ app.controller("HomeCtrl", function($scope) {
 
 
     // add photo pins
-
     for ( var i=0; i < photos.length; i++ ) {
 
       var marker = this.addMarker( {
