@@ -179,7 +179,11 @@
                         <dl>
                             <dt>Chooose your location on the map</dt>
                             <dd>
-                                <button ng-hide="authenticated" ng-click="auth3box()">Authenticate to 3Box</button><img src="images/spinner.gif" height=40 id="authenticating" class="button-spinner">
+                                
+                                <button ng-hide="authenticated" ng-click="auth3box()">Authenticate to 3Box</button>
+                                <div style="height:40px; display:inline-block">
+                                    <img src="images/spinner.gif" height=40 id="authenticating" style="display:none" class="button-spinner">
+                                </div>
 
                                 <div ng-show="authenticated">
                                     <label>Your name:
@@ -198,7 +202,10 @@
                                         <input type="text" placeholder="..." ng-model="boxData.lon" id="lon"><br>
                                     </label>
 
-                                    <button ng-click="save3box()">Save changes</button><img src="images/spinner.gif" height=40 id="saving" style="display:none" class="button-spinner">
+                                    <button ng-click="save3box()">Save changes</button>
+                                    <div style="height:40px; display:inline-block">
+                                        <img src="images/spinner.gif" height=40 id="saving" style="display:none" class="button-spinner">
+                                    </div>
 
                                     <p>For other settings you can use  <a href="https://3box.github.io/3box-profile-edit-react/examples/dist/">3Box standalone</a>.</p>
                                 </div>
