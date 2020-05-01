@@ -514,23 +514,29 @@ app.controller("DemoCtrl", function($scope, $http, $q) {
   }
 
   $scope.auth3box = async function() {
+    $("#authenticating").show();
     await $scope.connect();
 
-    const box = await Box.create(window.ethereum)
-    const spaces = [ 'EstoniaDAO']
-    await box.auth(spaces, { address: accounts[0] })
-    const space = await box.openSpace('EstoniaDAO')
+    const provider = await Box.get3idConnectProvider() // recommended provider
+    $scope.box = await Box.openBox($scope.address, provider)
+    $scope.boxData = await $scope.box.public.all()
 
-    $scope.profile = await box.public.all()
+    $("#authenticating").hide();
+    console.log($scope.boxData);
 
-    console.log(profile);
+    $scope.authenticated = true;
+    $scope.$apply();
+  }
 
+  $scope.save3box = async function() {
+    $("#saving").show();
 
-    // await space.private.set('item-to-buy', 'Pizza')
+    await $scope.box.public.setMultiple(
+      ['name', 'services', 'lat', 'lon'],
+      [ $scope.boxData.name, $scope.boxData.services, $scope.boxData.lat, $scope.boxData.lon]
+    )
 
-    $scope.spaceData = await space.private.all()
-
-    console.log(spaceData);
+    $("#saving").hide();
   }
 
 });
