@@ -43,15 +43,6 @@ function closePhoto() {
 
 app.controller("HomeCtrl", function($scope) {
 
-  // Some code duplication (see other controller, it just works, live with it)
-  // $scope.connect = async function() {
-  //   let address = await ethEnabled();
-  //   accounts = await web3.eth.getAccounts()
-  //   $scope.address = address[0] || accounts[0]
-  //   $scope.$apply();
-  // }
-
-
   $scope.results = []
 
   function retrieveData() {
@@ -373,8 +364,6 @@ app.controller("HomeCtrl", function($scope) {
 
 app.controller("DemoCtrl", function($scope, $http, $q) {
 
-  $scope.taxrate = 1;
-
   $scope.connect = async function() {
     let address = await ethEnabled();
     accounts = await web3.eth.getAccounts()
@@ -522,6 +511,26 @@ app.controller("DemoCtrl", function($scope, $http, $q) {
                           }
 
                        })
+  }
+
+  $scope.auth3box = async function() {
+    await $scope.connect();
+
+    const box = await Box.create(window.ethereum)
+    const spaces = [ 'EstoniaDAO']
+    await box.auth(spaces, { address: accounts[0] })
+    const space = await box.openSpace('EstoniaDAO')
+
+    $scope.profile = await box.public.all()
+
+    console.log(profile);
+
+
+    // await space.private.set('item-to-buy', 'Pizza')
+
+    $scope.spaceData = await space.private.all()
+
+    console.log(spaceData);
   }
 
 });
