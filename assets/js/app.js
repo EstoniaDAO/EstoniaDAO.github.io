@@ -75,11 +75,24 @@ app.controller("HomeCtrl", function($scope) {
 // proof_did: "eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NksifQ.eyJpYXQiOjE1ODgyNjk2NDUsImlzcyI6ImRpZDozOmJhZnlyZWliZG9wdDRhaWlkeXZvZXJkMzdndGQ0aXoycm00YnJweTNncGU1c2h3eGVtbHBwdm9tZWJlIn0.Y1mQxrmgI0zwjYY8F5k2NBmUWFTPy3v93TpRAZIQmjGAEBXXcOhwoktWFh414ZHOYCfXQlCr_h1P0SprPvpGVw"
 // subdomain: "mars2"
 
+            let calculatedLocation;
+
+            if (merged.lat && merged.lon) {
+              calculatedLocation = {
+                lat: merged.lat, 
+                lng: merged.lon
+              }
+            } else {
+              calculatedLocation = photos.pop().location;
+            }
+
+            console.log(calculatedLocation);
+
             var marker = myearthTHIS.addMarker( {
       
               mesh : "Marker",
               color: (i % 2 == 0) ? '#3a6a39' : '#6a5739',
-              location : photos.pop().location,
+              location : calculatedLocation,
               scale: 0.01,
               offset: 1.6,
               visible: false,
@@ -92,6 +105,7 @@ app.controller("HomeCtrl", function($scope) {
                 src: 'https://gateway.ipfs.io/ipfs/' + merged.image[0].contentUrl["/"],
                 name: merged.name,
                 emoji: merged.emoji,
+                services: merged.services,
                 subdomain: merged.subdomain,
                 tax:  merged.ppm / 10000
               }
@@ -135,9 +149,6 @@ app.controller("HomeCtrl", function($scope) {
     // })
   }
 
-  if (window.location.search === "?map") {
-    $("#myearth").show();
-  }
 
   var myearth;
   var sprites = [];
@@ -189,12 +200,13 @@ app.controller("HomeCtrl", function($scope) {
     // add photo overlay
         
     photo_overlay = this.addOverlay( {
-      content: `<div id="photo" style="font-size: 1.2em">
+      content: `<div id="photo" style="font-size: 1.3em">
                   <img id="img-src">
                   <div id="close-photo" onclick="closePhoto(); event.stopPropagation();"></div>
                   <p>
                     <span id="photo-name"></span>
                     <span id="photo-domain"></span>
+                    <span id="photo-services"></span>
                     <span id="photo-tax"></span>
                   </p>
                 </div>`,
@@ -346,7 +358,8 @@ app.controller("HomeCtrl", function($scope) {
     document.getElementById('img-src').src = this.photo_info.src;
     $('#photo-name').html("<h3 style='font-weight:bold; font-size: 1.2em'>" + this.photo_info.emoji + this.photo_info.name + "</h3>");
     $('#photo-domain').html("<code>" + this.photo_info.subdomain + ".estoniaropsten.eth</code><br>");
-    $('#photo-tax').html("Voluntary tax: " + this.photo_info.tax.toFixed(2) + "%");
+    $('#photo-services').html("<strong>Services:</strong> " + this.photo_info.services + "<br>");
+    $('#photo-tax').html("<strong>Voluntary tax:</strong> " + this.photo_info.tax.toFixed(2) + "%");
     
     photo_overlay.location = this.location;
     photo_overlay.visible = true;
@@ -481,7 +494,6 @@ app.controller("DemoCtrl", function($scope, $http, $q) {
         window.URL.revokeObjectURL(url);
     };
   }());
-
 
   function sendMessage(url) {
     var request = new XMLHttpRequest();
